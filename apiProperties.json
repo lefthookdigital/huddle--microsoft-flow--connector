@@ -1,0 +1,32 @@
+{
+  "properties": {
+    "capabilities": [],
+    "connectionParameters": {
+      "token": {
+        "oAuthSettings": {
+          "clientId": "Left_Hook_MS_Flow",
+          "customParameters": {
+            "authorizationUrl": {
+              "value": "https://login.huddle.net/request"
+            },
+            "refreshUrl": {
+              "value": "https://login.huddle.net/token"
+            },
+            "tokenUrl": {
+              "value": "https://login.huddle.net/token"
+            }
+          },
+          "identityProvider": "oauth2",
+          "properties": {
+            "IsFirstParty": "False"
+          },
+          "redirectMode": "Global",
+          "redirectUrl": "https://global.consent.azure-apim.net/redirect",
+          "scopes": []
+        },
+        "type": "oauthSetting"
+      }
+    },
+    "iconBrandColor": "#007ee5"
+  }
+}

@@ -1,0 +1,813 @@
+{
+  "basePath": "/",
+  "consumes": [],
+  "definitions": {},
+  "host": "api.huddle.net",
+  "info": {
+    "description": "Document Collaboration & Client Engagement Portals. The most effective way to work across teams, and with clients and partners",
+    "title": "Huddle",
+    "version": "1.0",
+    "x-ms-deployment-version": "1.0.0"
+  },
+  "parameters": {},
+  "paths": {
+    "/entry": {
+      "get": {
+        "description": "Get Workspaces for your Account",
+        "operationId": "GetWorkspaces",
+        "responses": {
+          "200": {
+            "description": "Returns a nested object where we need the array of membership and workspaces",
+            "schema": {
+              "properties": {
+                "client": {
+                  "description": "client",
+                  "properties": {
+                    "isMobilePinEnabled": {
+                      "description": "isMobilePinEnabled",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "internationalisation": {
+                  "description": "internationalisation",
+                  "properties": {
+                    "languageCode": {
+                      "description": "languageCode",
+                      "type": "string"
+                    },
+                    "timeZone": {
+                      "description": "timeZone",
+                      "type": "string"
+                    },
+                    "utcOffset": {
+                      "description": "utcOffset",
+                      "format": "int32",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "links": {
+                  "description": "links",
+                  "items": {
+                    "properties": {
+                      "href": {
+                        "description": "href",
+                        "type": "string"
+                      },
+                      "rel": {
+                        "description": "rel",
+                        "type": "string"
+                      },
+                      "type": {
+                        "description": "type",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "membership": {
+                  "description": "membership",
+                  "properties": {
+                    "workspaces": {
+                      "description": "workspaces",
+                      "items": {
+                        "properties": {
+                          "links": {
+                            "description": "links",
+                            "items": {
+                              "properties": {
+                                "href": {
+                                  "description": "href",
+                                  "type": "string"
+                                },
+                                "rel": {
+                                  "description": "rel",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "settings": {
+                            "description": "settings",
+                            "items": {
+                              "properties": {
+                                "name": {
+                                  "description": "name",
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "description": "value",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "title": {
+                            "description": "title",
+                            "type": "string"
+                          },
+                          "type": {
+                            "description": "type",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "profile": {
+                  "description": "profile",
+                  "properties": {
+                    "company": {
+                      "description": "company",
+                      "properties": {
+                        "links": {
+                          "description": "links",
+                          "items": {},
+                          "type": "array"
+                        },
+                        "name": {
+                          "description": "name",
+                          "type": "string"
+                        },
+                        "role": {
+                          "description": "role",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "contacts": {
+                      "description": "contacts",
+                      "items": {
+                        "properties": {
+                          "rel": {
+                            "description": "rel",
+                            "type": "string"
+                          },
+                          "value": {
+                            "description": "value",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "homeDomain": {
+                      "description": "homeDomain",
+                      "type": "string"
+                    },
+                    "personal": {
+                      "description": "personal",
+                      "properties": {
+                        "aboutMe": {
+                          "description": "aboutMe",
+                          "type": "string"
+                        },
+                        "displayName": {
+                          "description": "displayName",
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "description": "firstName",
+                          "type": "string"
+                        },
+                        "surname": {
+                          "description": "surname",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "settings": {
+                  "description": "settings",
+                  "properties": {
+                    "hasPerformedNewUserAction": {
+                      "description": "hasPerformedNewUserAction",
+                      "type": "boolean"
+                    },
+                    "hasSeenNewUserWebOnBoarding": {
+                      "description": "hasSeenNewUserWebOnBoarding",
+                      "type": "boolean"
+                    },
+                    "hasViewedCompanyManagerGuidance": {
+                      "description": "hasViewedCompanyManagerGuidance",
+                      "type": "boolean"
+                    },
+                    "hasViewedFileRequestGuidance": {
+                      "description": "hasViewedFileRequestGuidance",
+                      "type": "boolean"
+                    },
+                    "hasViewedFilesDetailsGuidance": {
+                      "description": "hasViewedFilesDetailsGuidance",
+                      "type": "boolean"
+                    },
+                    "hasViewedFolderGuidance": {
+                      "description": "hasViewedFolderGuidance",
+                      "type": "boolean"
+                    },
+                    "hasViewedGlobalNavigationGuidance": {
+                      "description": "hasViewedGlobalNavigationGuidance",
+                      "type": "boolean"
+                    },
+                    "hasViewedOfficeOnlineGuidance": {
+                      "description": "hasViewedOfficeOnlineGuidance",
+                      "type": "boolean"
+                    },
+                    "hasViewedTaskGuidance": {
+                      "description": "hasViewedTaskGuidance",
+                      "type": "boolean"
+                    },
+                    "hasViewedWorkspaceOverviewGuidance": {
+                      "description": "hasViewedWorkspaceOverviewGuidance",
+                      "type": "boolean"
+                    },
+                    "isNotificationsCenterEnabled": {
+                      "description": "isNotificationsCenterEnabled",
+                      "type": "boolean"
+                    },
+                    "isTwoFactorAuthEnabled": {
+                      "description": "isTwoFactorAuthEnabled",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Workspace retrieval to power dynamic dropdowns for days"
+      }
+    },
+    "/files/documents/{id}": {
+      "get": {
+        "description": "Get a file",
+        "operationId": "GetSpecificFile",
+        "parameters": [{
+          "description": "ID of the document of which to retrieve the content",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "number",
+          "x-ms-summary": "ID for retrieval"
+        }],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "properties": {
+                "actors": {
+                  "description": "actors",
+                  "items": {
+                    "properties": {
+                      "email": {
+                        "description": "email",
+                        "type": "string"
+                      },
+                      "links": {
+                        "description": "links",
+                        "items": {
+                          "properties": {
+                            "href": {
+                              "description": "href",
+                              "type": "string"
+                            },
+                            "rel": {
+                              "description": "rel",
+                              "type": "string"
+                            },
+                            "type": {
+                              "description": "type",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "name": {
+                        "description": "name",
+                        "type": "string"
+                      },
+                      "rel": {
+                        "description": "rel",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "created": {
+                  "description": "created",
+                  "type": "string"
+                },
+                "description": {
+                  "description": "description",
+                  "type": "string"
+                },
+                "extension": {
+                  "description": "extension",
+                  "type": "string"
+                },
+                "links": {
+                  "description": "links",
+                  "items": {
+                    "properties": {
+                      "count": {
+                        "description": "count",
+                        "type": "string"
+                      },
+                      "href": {
+                        "description": "href",
+                        "type": "string"
+                      },
+                      "rel": {
+                        "description": "rel",
+                        "type": "string"
+                      },
+                      "title": {
+                        "description": "title",
+                        "type": "string"
+                      },
+                      "type": {
+                        "description": "type",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "mimeType": {
+                  "description": "mimeType",
+                  "type": "string"
+                },
+                "processingStatus": {
+                  "description": "processingStatus",
+                  "type": "string"
+                },
+                "publications": {
+                  "description": "publications",
+                  "properties": {
+                    "links": {
+                      "description": "links",
+                      "items": {},
+                      "type": "array"
+                    },
+                    "scope": {
+                      "description": "scope",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "size": {
+                  "description": "size",
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "tags": {
+                  "description": "tags",
+                  "items": {},
+                  "type": "array"
+                },
+                "title": {
+                  "description": "title",
+                  "type": "string"
+                },
+                "updated": {
+                  "description": "updated",
+                  "type": "string"
+                },
+                "version": {
+                  "description": "version",
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "views": {
+                  "description": "views",
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "workspace": {
+                  "description": "workspace",
+                  "properties": {
+                    "links": {
+                      "description": "links",
+                      "items": {
+                        "properties": {
+                          "href": {
+                            "description": "href",
+                            "type": "string"
+                          },
+                          "rel": {
+                            "description": "rel",
+                            "type": "string"
+                          },
+                          "type": {
+                            "description": "type",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "title": {
+                      "description": "title",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Get a specific file every time",
+        "x-ms-trigger": "batch",
+        "x-ms-trigger-metadata": {
+          "kind": "query",
+          "mode": "polling"
+        },
+        "x-ms-visibility": "important"
+      }
+    },
+    "/files/documents/{id}/content": {
+      "get": {
+        "description": "Gets File Content",
+        "operationId": "GetFileContent",
+        "parameters": [
+          {
+            "description": "ID of the document of which to retrieve the content",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "number",
+            "x-ms-summary": "ID for retrieval"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result file",
+            "schema": {
+              "format": "binary",
+              "title": "Result file",
+              "type": "string"
+            }
+          }
+        },
+        "summary": "Get File Content",
+        "x-ms-visibility": "important"
+      }
+    },
+    "/files/folders/{folderId}/documents": {
+      "post": {
+        "description": "Uploads a File within a target folder",
+        "operationId": "UploadFile",
+        "parameters": [
+          {
+            "description": "ID of the folder",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "number",
+            "x-ms-summary": "ID for folder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result file",
+            "schema": {
+              "format": "binary",
+              "title": "Result file",
+              "type": "string"
+            }
+          }
+        },
+        "summary": "Upload New File",
+        "x-ms-visibility": "important"
+        
+      }
+    },
+    "/files/folders/{folderId}": {
+      "post": {
+        "description": "Creates Folder or SubFolder in Selected Parent",
+        "operationId": "CreateFolder",
+        "parameters": [
+          {
+            "description": "ID of the folder",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "number",
+            "x-ms-summary": "ID for folder"
+          }
+        ],
+        "responses": {
+        },
+        "summary": "Create New Folder",
+        "x-ms-visibility": "important"
+        
+      },
+      "delete": {
+        "description": "Deletes a Folder or SubFolder in Selected Parent",
+        "operationId": "DeleteFolder",
+        "parameters": [
+          {
+            "description": "ID of the folder",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "number",
+            "x-ms-summary": "ID for folder"
+          }
+        ],
+        "responses": {
+        },
+        "summary": "Delete Folder",
+        "x-ms-visibility": "important"
+        
+      },
+      "get": {
+        "description": "New File Uploaded to Target Folder",
+        "operationId": "NewFileUploaded",
+        "parameters": [{
+          "description": "ID of the folder to monitor",
+          "in": "path",
+          "name": "folderId",
+          "required": true,
+          "type": "number",
+          "x-ms-summary": "ID of folder to monitor"
+        }],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "properties": {
+                "actors": {
+                  "description": "actors",
+                  "items": {
+                    "properties": {
+                      "email": {
+                        "description": "email",
+                        "type": "string"
+                      },
+                      "links": {
+                        "description": "links",
+                        "items": {
+                          "properties": {
+                            "href": {
+                              "description": "href",
+                              "type": "string"
+                            },
+                            "rel": {
+                              "description": "rel",
+                              "type": "string"
+                            },
+                            "type": {
+                              "description": "type",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "name": {
+                        "description": "name",
+                        "type": "string"
+                      },
+                      "rel": {
+                        "description": "rel",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "created": {
+                  "description": "created",
+                  "type": "string"
+                },
+                "description": {
+                  "description": "description",
+                  "type": "string"
+                },
+                "extension": {
+                  "description": "extension",
+                  "type": "string"
+                },
+                "links": {
+                  "description": "links",
+                  "items": {
+                    "properties": {
+                      "count": {
+                        "description": "count",
+                        "type": "string"
+                      },
+                      "href": {
+                        "description": "href",
+                        "type": "string"
+                      },
+                      "rel": {
+                        "description": "rel",
+                        "type": "string"
+                      },
+                      "title": {
+                        "description": "title",
+                        "type": "string"
+                      },
+                      "type": {
+                        "description": "type",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "mimeType": {
+                  "description": "mimeType",
+                  "type": "string"
+                },
+                "processingStatus": {
+                  "description": "processingStatus",
+                  "type": "string"
+                },
+                "publications": {
+                  "description": "publications",
+                  "properties": {
+                    "links": {
+                      "description": "links",
+                      "items": {},
+                      "type": "array"
+                    },
+                    "scope": {
+                      "description": "scope",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "size": {
+                  "description": "size",
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "tags": {
+                  "description": "tags",
+                  "items": {},
+                  "type": "array"
+                },
+                "title": {
+                  "description": "title",
+                  "type": "string"
+                },
+                "updated": {
+                  "description": "updated",
+                  "type": "string"
+                },
+                "version": {
+                  "description": "version",
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "views": {
+                  "description": "views",
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "workspace": {
+                  "description": "workspace",
+                  "properties": {
+                    "links": {
+                      "description": "links",
+                      "items": {
+                        "properties": {
+                          "href": {
+                            "description": "href",
+                            "type": "string"
+                          },
+                          "rel": {
+                            "description": "rel",
+                            "type": "string"
+                          },
+                          "type": {
+                            "description": "type",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "title": {
+                      "description": "title",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Watch a folder for new file uploads",
+        "x-ms-trigger": "batch",
+        "x-ms-trigger-metadata": {
+          "kind": "query",
+          "mode": "polling"
+        },
+        "x-ms-visibility": "important"
+        
+      }
+    },
+    "/tasks/workspace/{workspaceId}": {
+      "post": {
+        "description": "Creates a new Task",
+        "operationId": "CreateTask",
+        "parameters": [
+          {
+            "description": "ID of the workspace",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "type": "number",
+            "x-ms-summary": "ID for workspace"
+          }
+        ],
+        "responses": {
+        },
+        "summary": "Create New Task",
+        "x-ms-visibility": "important"
+        
+      }
+    },
+    "/tasks/{taskId}": {
+      "put": {
+        "description": "Mark Task as Complete",
+        "operationId": "MarkTaskAsComplete",
+        "parameters": [
+          {
+            "description": "ID of the task",
+            "in": "path",
+            "name": "taskId",
+            "required": true,
+            "type": "number",
+            "x-ms-summary": "ID for task"
+          }
+        ],
+        "responses": {
+        },
+        "summary": "Mark Task as Complete",
+        "x-ms-visibility": "important"
+        
+      }
+    }
+
+  },
+  "produces": [],
+  "responses": {},
+  "schemes": [
+    "https"
+  ],
+  "security": [
+    {
+      "oauth2_auth": []
+    }
+  ],
+  "securityDefinitions": {
+    "oauth2_auth": {
+      "authorizationUrl": "https://login.huddle.net/request",
+      "flow": "accessCode",
+      "scopes": {},
+      "tokenUrl": "https://login.huddle.net/token",
+      "type": "oauth2"
+    }
+  },
+  "swagger": "2.0",
+  "tags": []
+}
