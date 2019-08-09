@@ -1,0 +1,50 @@
+{
+   "host" : {
+      "cloudProvider" : "aws",
+      "runtime" : {
+         "type" : "javascript",
+         "exec" : "nodejs",
+         "version" : "10.x"
+      },
+      "framework" : "serverless",
+      "ci" : "console.seed.run"
+   },
+   "current" : {
+   },
+   "new" : {
+      "apiCalls" : [
+         {
+            "resource"  : "folders",
+            "requestMethod" : "GET",
+            "endpoint" : "/?",
+            "response" : {},
+            "transforms" : []
+         },
+         {
+            "resource"  : "subfolders",
+            "requestMethod" : "GET",
+            "endpoint" : "/?",
+            "response" : {},
+            "transforms" : []
+         },
+         {
+            "resource"  : "workspaces",
+            "requestMethod" : "GET",
+            "endpoint" : "/?",
+            "response" : {},
+            "transforms" : []
+         },
+         {
+            "resource" : "authentication",
+            "requestMethod" : {
+               "oauth" : "2.0"
+            },
+            "endpoint" : "/?",
+            "response" : {},
+            "transforms" : []
+         }
+
+      ]
+   }
+
+}
