@@ -1,809 +1,707 @@
 {
-  "basePath": "/",
-  "consumes": [],
-  "definitions": {},
-  "host": "api.huddle.net",
+  "basePath": "/dev",
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "File": {
+      "properties": {
+        "content": {
+          "description": "The binary content of the file",
+          "format": "binary",
+          "type": "string",
+          "x-ms-summary": "Content"
+        },
+        "contentType": {
+          "description": "The file's document MIME type",
+          "type": "string",
+          "x-ms-summary": "Type"
+        },
+        "created": {
+          "description": "The date and time the file was created",
+          "format": "date",
+          "type": "string",
+          "x-ms-summary": "File Created"
+        },
+        "description": {
+          "description": "A description of the file",
+          "type": "string",
+          "x-ms-summary": "Description"
+        },
+        "extension": {
+          "description": "The file's extension",
+          "type": "string",
+          "x-ms-summary": "Extension"
+        },
+        "folderId": {
+          "description": "ID of the folder in which the file resides",
+          "type": "string",
+          "x-ms-summary": "Folder ID"
+        },
+        "id": {
+          "description": "The file's ID",
+          "type": "string",
+          "x-ms-summary": "File ID"
+        },
+        "title": {
+          "description": "The file's title",
+          "type": "string",
+          "x-ms-summary": "Title"
+        },
+        "updated": {
+          "description": "The date and time the file was last updated",
+          "format": "date",
+          "type": "string",
+          "x-ms-summary": "Last Updated"
+        },
+        "workspaceId": {
+          "description": "The ID of the workspace in which the file resides",
+          "type": "string",
+          "x-ms-summary": "Workspace ID"
+        }
+      },
+      "type": "object"
+    },
+    "Folder": {
+      "properties": {
+        "children": {
+          "description": "The child folders contained within the current one",
+          "items": {
+            "type": "object"
+          },
+          "type": "array",
+          "x-ms-summary": "Child folders ( Subfolders )"
+        },
+        "description": {
+          "description": "Description",
+          "type": "string",
+          "x-ms-summary": "Description"
+        },
+        "files": {
+          "description": "The documents and files contained within the current one",
+          "items": {
+            "$ref": "#/definitions/File"
+          },
+          "type": "array",
+          "x-ms-summary": "Files"
+        },
+        "id": {
+          "description": "The ID of the folder",
+          "type": "string",
+          "x-ms-summary": "Folder ID"
+        },
+        "title": {
+          "description": "The title of the folder",
+          "type": "string",
+          "x-ms-summary": "Title"
+        }
+      },
+      "type": "object"
+    },
+    "Task": {
+      "properties": {
+        "asignee": {
+          "description": "The ID of user to whom the task is assigned, if any",
+          "type": "string",
+          "x-ms-summary": "Asignee"
+        },
+        "description": {
+          "description": "A description of the task",
+          "type": "string",
+          "x-ms-summary": "Description"
+        },
+        "dueDate": {
+          "description": "The date by which the task should be completed",
+          "type": "string",
+          "x-ms-summary": "Due Date"
+        },
+        "fileId": {
+          "description": "The ID of the file the task is associated with, if any",
+          "type": "string",
+          "x-ms-summary": "File ID"
+        },
+        "id": {
+          "description": "The ID of the task",
+          "type": "string",
+          "x-ms-summary": "Task ID"
+        },
+        "status": {
+          "description": "The task's status",
+          "type": "string",
+          "x-ms-summary": "Status"
+        },
+        "title": {
+          "description": "The task's title",
+          "type": "string",
+          "x-ms-summary": "Title"
+        },
+        "type": {
+          "description": "The type of task",
+          "type": "string",
+          "x-ms-summary": "Type"
+        },
+        "workspaceId": {
+          "description": "The ID of the workspace the task resides in",
+          "type": "string",
+          "x-ms-summary": "Workspace ID"
+        }
+      },
+      "type": "object"
+    },
+    "Workspace": {
+      "properties": {
+        "files": {
+          "description": "Files in the workspace's root directory",
+          "items": {
+            "type": "object"
+          },
+          "type": "array",
+          "x-ms-summary": "Files"
+        },
+        "folders": {
+          "description": "Folders in the workspace's root directory",
+          "items": {
+            "type": "object"
+          },
+          "type": "array",
+          "x-ms-summary": "Folders"
+        },
+        "id": {
+          "description": "The ID of the workspace",
+          "type": "string",
+          "x-ms-summary": "Workspace ID"
+        },
+        "title": {
+          "description": "The title of the workspace",
+          "type": "string",
+          "x-ms-summary": "Title"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "host": "kkdwwk9869.execute-api.us-east-1.amazonaws.com",
   "info": {
-    "description": "Document Collaboration & Client Engagement Portals. The most effective way to work across teams, and with clients and partners",
+    "description": "Connector to Huddle's API",
     "title": "Huddle",
-    "version": "1.0",
-    "x-ms-deployment-version": "1.0.0"
+    "version": "2.0"
   },
   "parameters": {},
   "paths": {
-    "/entry": {
+    "/v2/workspace/{workspaceId}/paths": {
       "get": {
-        "description": "Get Workspaces for your Account",
-        "operationId": "GetWorkspaces",
+        "description": "Experimental",
+        "operationId": "GetWorkspacePaths",
+        "x-ms-visibility": "internal",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Returns a nested object where we need the array of membership and workspaces",
+            "description": "OK",
             "schema": {
+              "type": "object",
               "properties": {
-                "client": {
-                  "description": "client",
-                  "properties": {
-                    "isMobilePinEnabled": {
-                      "description": "isMobilePinEnabled",
-                      "type": "boolean"
-                    }
-                  },
-                  "type": "object"
-                },
-                "internationalisation": {
-                  "description": "internationalisation",
-                  "properties": {
-                    "languageCode": {
-                      "description": "languageCode",
-                      "type": "string"
-                    },
-                    "timeZone": {
-                      "description": "timeZone",
-                      "type": "string"
-                    },
-                    "utcOffset": {
-                      "description": "utcOffset",
-                      "format": "int32",
-                      "type": "integer"
-                    }
-                  },
-                  "type": "object"
-                },
-                "links": {
-                  "description": "links",
+                "paths": {
+                  "type": "array",
                   "items": {
+                    "type": "object",
                     "properties": {
-                      "href": {
-                        "description": "href",
+                      "title": {
                         "type": "string"
                       },
-                      "rel": {
-                        "description": "rel",
+                      "path": {
                         "type": "string"
                       },
-                      "type": {
-                        "description": "type",
+                      "id": {
                         "type": "string"
                       }
-                    },
-                    "type": "object"
-                  },
-                  "type": "array"
-                },
-                "membership": {
-                  "description": "membership",
-                  "properties": {
-                    "workspaces": {
-                      "description": "workspaces",
-                      "items": {
-                        "properties": {
-                          "links": {
-                            "description": "links",
-                            "items": {
-                              "properties": {
-                                "href": {
-                                  "description": "href",
-                                  "type": "string"
-                                },
-                                "rel": {
-                                  "description": "rel",
-                                  "type": "string"
-                                }
-                              },
-                              "type": "object"
-                            },
-                            "type": "array"
-                          },
-                          "settings": {
-                            "description": "settings",
-                            "items": {
-                              "properties": {
-                                "name": {
-                                  "description": "name",
-                                  "type": "string"
-                                },
-                                "value": {
-                                  "description": "value",
-                                  "type": "string"
-                                }
-                              },
-                              "type": "object"
-                            },
-                            "type": "array"
-                          },
-                          "title": {
-                            "description": "title",
-                            "type": "string"
-                          },
-                          "type": {
-                            "description": "type",
-                            "type": "string"
-                          }
-                        },
-                        "type": "object"
-                      },
-                      "type": "array"
                     }
-                  },
-                  "type": "object"
-                },
-                "profile": {
-                  "description": "profile",
-                  "properties": {
-                    "company": {
-                      "description": "company",
-                      "properties": {
-                        "links": {
-                          "description": "links",
-                          "items": {},
-                          "type": "array"
-                        },
-                        "name": {
-                          "description": "name",
-                          "type": "string"
-                        },
-                        "role": {
-                          "description": "role",
-                          "type": "string"
-                        }
-                      },
-                      "type": "object"
-                    },
-                    "contacts": {
-                      "description": "contacts",
-                      "items": {
-                        "properties": {
-                          "rel": {
-                            "description": "rel",
-                            "type": "string"
-                          },
-                          "value": {
-                            "description": "value",
-                            "type": "string"
-                          }
-                        },
-                        "type": "object"
-                      },
-                      "type": "array"
-                    },
-                    "homeDomain": {
-                      "description": "homeDomain",
-                      "type": "string"
-                    },
-                    "personal": {
-                      "description": "personal",
-                      "properties": {
-                        "aboutMe": {
-                          "description": "aboutMe",
-                          "type": "string"
-                        },
-                        "displayName": {
-                          "description": "displayName",
-                          "type": "string"
-                        },
-                        "firstName": {
-                          "description": "firstName",
-                          "type": "string"
-                        },
-                        "surname": {
-                          "description": "surname",
-                          "type": "string"
-                        }
-                      },
-                      "type": "object"
-                    }
-                  },
-                  "type": "object"
-                },
-                "settings": {
-                  "description": "settings",
-                  "properties": {
-                    "hasPerformedNewUserAction": {
-                      "description": "hasPerformedNewUserAction",
-                      "type": "boolean"
-                    },
-                    "hasSeenNewUserWebOnBoarding": {
-                      "description": "hasSeenNewUserWebOnBoarding",
-                      "type": "boolean"
-                    },
-                    "hasViewedCompanyManagerGuidance": {
-                      "description": "hasViewedCompanyManagerGuidance",
-                      "type": "boolean"
-                    },
-                    "hasViewedFileRequestGuidance": {
-                      "description": "hasViewedFileRequestGuidance",
-                      "type": "boolean"
-                    },
-                    "hasViewedFilesDetailsGuidance": {
-                      "description": "hasViewedFilesDetailsGuidance",
-                      "type": "boolean"
-                    },
-                    "hasViewedFolderGuidance": {
-                      "description": "hasViewedFolderGuidance",
-                      "type": "boolean"
-                    },
-                    "hasViewedGlobalNavigationGuidance": {
-                      "description": "hasViewedGlobalNavigationGuidance",
-                      "type": "boolean"
-                    },
-                    "hasViewedOfficeOnlineGuidance": {
-                      "description": "hasViewedOfficeOnlineGuidance",
-                      "type": "boolean"
-                    },
-                    "hasViewedTaskGuidance": {
-                      "description": "hasViewedTaskGuidance",
-                      "type": "boolean"
-                    },
-                    "hasViewedWorkspaceOverviewGuidance": {
-                      "description": "hasViewedWorkspaceOverviewGuidance",
-                      "type": "boolean"
-                    },
-                    "isNotificationsCenterEnabled": {
-                      "description": "isNotificationsCenterEnabled",
-                      "type": "boolean"
-                    },
-                    "isTwoFactorAuthEnabled": {
-                      "description": "isTwoFactorAuthEnabled",
-                      "type": "boolean"
-                    }
-                  },
-                  "type": "object"
+                  }
                 }
-              },
-              "type": "object"
+              }
             }
           }
-        },
-        "summary": "Workspace retrieval to power dynamic dropdowns for days"
+        }
       }
     },
-    "/files/documents/{id}": {
+    "/trigger/v2/poll/folder/{folderId}/upload": {
       "get": {
-        "description": "Get a file",
-        "operationId": "GetSpecificFile",
-        "parameters": [{
-          "description": "ID of the document of which to retrieve the content",
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "type": "number",
-          "x-ms-summary": "ID for retrieval"
-        }],
+        "description": "Poll a target folder for it's most recent upload",
+        "operationId": "PollFolderForFileUpload",
+        "parameters": [
+          {
+            "description": "The workspace to watch a folder in",
+            "in": "query",
+            "name": "workspaceId",
+            "required": true,
+            "type": "string",
+            "x-ms-dynamic-values": {
+              "operationId": "GetWorkspaces",
+              "value-collection": "workspaces",
+              "value-path": "id",
+              "value-title": "title"
+            },
+            "x-ms-summary": "Workspace"
+          },
+          {
+            "description": "The folder to watch",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "string",
+            "x-ms-dynamic-values": {
+              "operationId": "GetWorkspacePaths",
+              "parameters": {
+                "workspaceId": {
+                  "parameter" : "workspaceId"
+                }
+              },
+              "value-collection" : "paths",
+              "value-path": "id",
+              "value-title": "path"
+            },
+            "x-ms-summary": "Target Folder"
+          },
+          {
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "type": "string",
+            "x-ms-visibility": "internal"
+          }
+        ],
         "responses": {
-          "default": {
+          "200": {
             "description": "default",
             "schema": {
               "properties": {
-                "actors": {
-                  "description": "actors",
+                "files": {
+                  "description": "files",
                   "items": {
-                    "properties": {
-                      "email": {
-                        "description": "email",
-                        "type": "string"
-                      },
-                      "links": {
-                        "description": "links",
-                        "items": {
-                          "properties": {
-                            "href": {
-                              "description": "href",
-                              "type": "string"
-                            },
-                            "rel": {
-                              "description": "rel",
-                              "type": "string"
-                            },
-                            "type": {
-                              "description": "type",
-                              "type": "string"
-                            }
-                          },
-                          "type": "object"
-                        },
-                        "type": "array"
-                      },
-                      "name": {
-                        "description": "name",
-                        "type": "string"
-                      },
-                      "rel": {
-                        "description": "rel",
-                        "type": "string"
-                      }
-                    },
-                    "type": "object"
+                    "$ref": "#/definitions/File"
                   },
                   "type": "array"
-                },
-                "created": {
-                  "description": "created",
-                  "type": "string"
-                },
-                "description": {
-                  "description": "description",
-                  "type": "string"
-                },
-                "extension": {
-                  "description": "extension",
-                  "type": "string"
-                },
-                "links": {
-                  "description": "links",
-                  "items": {
-                    "properties": {
-                      "count": {
-                        "description": "count",
-                        "type": "string"
-                      },
-                      "href": {
-                        "description": "href",
-                        "type": "string"
-                      },
-                      "rel": {
-                        "description": "rel",
-                        "type": "string"
-                      },
-                      "title": {
-                        "description": "title",
-                        "type": "string"
-                      },
-                      "type": {
-                        "description": "type",
-                        "type": "string"
-                      }
-                    },
-                    "type": "object"
-                  },
-                  "type": "array"
-                },
-                "mimeType": {
-                  "description": "mimeType",
-                  "type": "string"
-                },
-                "processingStatus": {
-                  "description": "processingStatus",
-                  "type": "string"
-                },
-                "publications": {
-                  "description": "publications",
-                  "properties": {
-                    "links": {
-                      "description": "links",
-                      "items": {},
-                      "type": "array"
-                    },
-                    "scope": {
-                      "description": "scope",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "size": {
-                  "description": "size",
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "tags": {
-                  "description": "tags",
-                  "items": {},
-                  "type": "array"
-                },
-                "title": {
-                  "description": "title",
-                  "type": "string"
-                },
-                "updated": {
-                  "description": "updated",
-                  "type": "string"
-                },
-                "version": {
-                  "description": "version",
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "views": {
-                  "description": "views",
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "workspace": {
-                  "description": "workspace",
-                  "properties": {
-                    "links": {
-                      "description": "links",
-                      "items": {
-                        "properties": {
-                          "href": {
-                            "description": "href",
-                            "type": "string"
-                          },
-                          "rel": {
-                            "description": "rel",
-                            "type": "string"
-                          },
-                          "type": {
-                            "description": "type",
-                            "type": "string"
-                          }
-                        },
-                        "type": "object"
-                      },
-                      "type": "array"
-                    },
-                    "title": {
-                      "description": "title",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
                 }
               },
               "type": "object"
             }
           }
         },
-        "summary": "Get a specific file every time",
+        "summary": "Poll a target folder for it's most recent upload",
         "x-ms-trigger": "batch",
+        "x-ms-trigger-hint": "Hint",
         "x-ms-trigger-metadata": {
           "kind": "query",
           "mode": "polling"
-        },
-        "x-ms-visibility": "important"
+        }
       }
     },
-    "/files/documents/{id}/content": {
+    "/v2/file/{fileId}": {
       "get": {
-        "description": "Gets File Content",
-        "operationId": "GetFileContent",
+        "description": "Get the content and metadata of a file by ID",
+        "operationId": "GetFile",
         "parameters": [
           {
-            "description": "ID of the document of which to retrieve the content",
+            "description": "The ID of the file to get",
             "in": "path",
-            "name": "id",
+            "name": "fileId",
             "required": true,
-            "type": "number",
-            "x-ms-summary": "ID for retrieval"
+            "type": "string",
+            "x-ms-summary": "File ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "Result file",
+            "description": "OK",
             "schema": {
-              "format": "binary",
-              "title": "Result file",
-              "type": "string"
+              "$ref": "#/definitions/File"
             }
           }
         },
-        "summary": "Get File Content",
-        "x-ms-visibility": "important"
+        "summary": "Retrieve the content and metadata of a file using its ID"
       }
     },
-    "/files/folders/{folderId}/documents": {
-      "post": {
-        "description": "Uploads a File within a target folder",
-        "operationId": "UploadFile",
-        "parameters": [
-          {
-            "description": "ID of the folder",
-            "in": "path",
-            "name": "folderId",
-            "required": true,
-            "type": "number",
-            "x-ms-summary": "ID for folder"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Result file",
-            "schema": {
-              "format": "binary",
-              "title": "Result file",
-              "type": "string"
-            }
-          }
-        },
-        "summary": "Upload New File",
-        "x-ms-visibility": "important"
-        
-      }
-    },
-    "/files/folders/{folderId}": {
-      "post": {
-        "description": "Creates Folder or SubFolder in Selected Parent",
-        "operationId": "CreateFolder",
-        "parameters": [
-          {
-            "description": "ID of the folder",
-            "in": "path",
-            "name": "folderId",
-            "required": true,
-            "type": "number",
-            "x-ms-summary": "ID for folder"
-          }
-        ],
-        "responses": {
-        },
-        "summary": "Create New Folder",
-        "x-ms-visibility": "important"
-        
-      },
+    "/v2/folder/{folderId}": {
       "delete": {
-        "description": "Deletes a Folder or SubFolder in Selected Parent",
+        "description": "Delete a folder by ID",
         "operationId": "DeleteFolder",
         "parameters": [
           {
-            "description": "ID of the folder",
+            "description": "The ID of the folder to delete",
             "in": "path",
             "name": "folderId",
             "required": true,
-            "type": "number",
-            "x-ms-summary": "ID for folder"
+            "type": "string",
+            "x-ms-summary": "Folder"
           }
         ],
         "responses": {
-        },
-        "summary": "Delete Folder",
-        "x-ms-visibility": "important"
-        
-      },
-      "get": {
-        "description": "New File Uploaded to Target Folder",
-        "operationId": "NewFileUploaded",
-        "parameters": [{
-          "description": "ID of the folder to monitor",
-          "in": "path",
-          "name": "folderId",
-          "required": true,
-          "type": "number",
-          "x-ms-summary": "ID of folder to monitor"
-        }],
-        "responses": {
-          "default": {
-            "description": "default",
+          "200": {
+            "description": "OK",
             "schema": {
               "properties": {
-                "actors": {
-                  "description": "actors",
-                  "items": {
-                    "properties": {
-                      "email": {
-                        "description": "email",
-                        "type": "string"
-                      },
-                      "links": {
-                        "description": "links",
-                        "items": {
-                          "properties": {
-                            "href": {
-                              "description": "href",
-                              "type": "string"
-                            },
-                            "rel": {
-                              "description": "rel",
-                              "type": "string"
-                            },
-                            "type": {
-                              "description": "type",
-                              "type": "string"
-                            }
-                          },
-                          "type": "object"
-                        },
-                        "type": "array"
-                      },
-                      "name": {
-                        "description": "name",
-                        "type": "string"
-                      },
-                      "rel": {
-                        "description": "rel",
-                        "type": "string"
-                      }
-                    },
-                    "type": "object"
-                  },
-                  "type": "array"
-                },
-                "created": {
-                  "description": "created",
-                  "type": "string"
-                },
-                "description": {
-                  "description": "description",
-                  "type": "string"
-                },
-                "extension": {
-                  "description": "extension",
-                  "type": "string"
-                },
-                "links": {
-                  "description": "links",
-                  "items": {
-                    "properties": {
-                      "count": {
-                        "description": "count",
-                        "type": "string"
-                      },
-                      "href": {
-                        "description": "href",
-                        "type": "string"
-                      },
-                      "rel": {
-                        "description": "rel",
-                        "type": "string"
-                      },
-                      "title": {
-                        "description": "title",
-                        "type": "string"
-                      },
-                      "type": {
-                        "description": "type",
-                        "type": "string"
-                      }
-                    },
-                    "type": "object"
-                  },
-                  "type": "array"
-                },
-                "mimeType": {
-                  "description": "mimeType",
-                  "type": "string"
-                },
-                "processingStatus": {
-                  "description": "processingStatus",
-                  "type": "string"
-                },
-                "publications": {
-                  "description": "publications",
-                  "properties": {
-                    "links": {
-                      "description": "links",
-                      "items": {},
-                      "type": "array"
-                    },
-                    "scope": {
-                      "description": "scope",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "size": {
-                  "description": "size",
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "tags": {
-                  "description": "tags",
-                  "items": {},
-                  "type": "array"
-                },
-                "title": {
-                  "description": "title",
-                  "type": "string"
-                },
-                "updated": {
-                  "description": "updated",
-                  "type": "string"
-                },
-                "version": {
-                  "description": "version",
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "views": {
-                  "description": "views",
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "workspace": {
-                  "description": "workspace",
-                  "properties": {
-                    "links": {
-                      "description": "links",
-                      "items": {
-                        "properties": {
-                          "href": {
-                            "description": "href",
-                            "type": "string"
-                          },
-                          "rel": {
-                            "description": "rel",
-                            "type": "string"
-                          },
-                          "type": {
-                            "description": "type",
-                            "type": "string"
-                          }
-                        },
-                        "type": "object"
-                      },
-                      "type": "array"
-                    },
-                    "title": {
-                      "description": "title",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
+                "deleted": {
+                  "type": "boolean"
                 }
               },
               "type": "object"
             }
           }
         },
-        "summary": "Watch a folder for new file uploads",
-        "x-ms-trigger": "batch",
-        "x-ms-trigger-metadata": {
-          "kind": "query",
-          "mode": "polling"
-        },
-        "x-ms-visibility": "important"
-        
-      }
-    },
-    "/tasks/workspace/{workspaceId}": {
-      "post": {
-        "description": "Creates a new Task",
-        "operationId": "CreateTask",
+        "summary": "Delete a target folder using its ID"
+      },
+      "get": {
+        "description": "Gets a folder by ID from the Huddle API",
+        "operationId": "GetFolder",
+        "x-ms-visibility": "internal",
         "parameters": [
           {
-            "description": "ID of the workspace",
+            "description": "The ID of the folder to get",
             "in": "path",
-            "name": "workspaceId",
+            "name": "folderId",
             "required": true,
-            "type": "number",
-            "x-ms-summary": "ID for workspace"
+            "type": "string",
+            "x-ms-summary": "Folder"
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Folder"
+            }
+          }
         },
-        "summary": "Create New Task",
-        "x-ms-visibility": "important"
-        
-      }
-    },
-    "/tasks/{taskId}": {
-      "put": {
-        "description": "Mark Task as Complete",
-        "operationId": "MarkTaskAsComplete",
+        "summary": "Retrieve a folder by it's ID"
+      },
+      "post": {
+        "description": "Creates a new folder within the target folder",
+        "operationId": "CreateFolder",
         "parameters": [
           {
-            "description": "ID of the task",
+            "description": "The ID of the folder in which the new one will be created",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Folder"
+          },
+          {
+            "in": "body",
+            "name": "requestBody",
+            "schema": {
+              "$ref": "#/definitions/Folder"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Folder"
+            }
+          }
+        },
+        "summary": "Create a new subfolder"
+      }
+    },
+    "/v2/file/upload/folder/{folderId}": {
+      "post": {
+        "description": "Upload a form submission as a text file",
+        "summary": "Takes the content provided and uploads as a text file",
+        "operationId": "UploadFormSubmissionAsNewFile",
+        "x-ms-visibility": "internal",
+        "parameters": [
+          {
+            "name": "folderId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Target Folder",
+            "description": "The folder to upload the document to"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "File options",
+            "x-ms-summary": "File",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "$ref": "#/definitions/File"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/folder/{folderId}/children": {
+      "get": {
+        "description": "Lists the child folders contained within the target folder",
+        "operationId": "GetChildFolders",
+        "x-ms-visibility": "internal",
+        "parameters": [
+          {
+            "description": "The ID of the parent folder",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Folder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Folder"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Retrieve a list of all of the subfolders within a target folder"
+      }
+    },
+    "/v2/folder/{folderId}/upload": {
+      "post": {
+        "description": "Uploads a file to the target folder",
+        "operationId": "UploadFile",
+        "x-ms-visibility": "important",
+        "parameters": [
+          {
+            "description": "The target folder to upload the file to",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "string",
+            "x-ms-dynamic-values": {
+              "operationId": "GetChildFolders",
+              "parameters": {
+                "folderId": {
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetWorkspaces",
+                    "value-collection": "folders",
+                    "value-path": "id",
+                    "value-title": "title"
+                  }
+                }
+              },
+              "value-path": "id",
+              "value-title": "title"
+            },
+            "x-ms-summary": "Folder"
+          },
+          {
+            "in": "body",
+            "name": "requestBody",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "$ref": "#/definitions/File"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create and upload a new file to a target folder"
+      }
+    },
+    "/v2/poll/folder/{folderId}/upload": {},
+    "/v2/task/{taskId}/markComplete": {
+      "post": {
+        "description": "Update a task's status to completed",
+        "operationId": "MarkTaskComplete",
+        "parameters": [
+          {
+            "description": "The ID of the task to mark as complete",
             "in": "path",
             "name": "taskId",
             "required": true,
-            "type": "number",
-            "x-ms-summary": "ID for task"
+            "type": "string",
+            "x-ms-summary": "Task ID"
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
         },
-        "summary": "Mark Task as Complete",
-        "x-ms-visibility": "important"
-        
+        "summary": "Update a task's status to completed using it's ID"
+      }
+    },
+    "/v2/workspace": {
+      "get": {
+        "description": "Get an array of available workspaces",
+        "operationId": "GetWorkspaces",
+        "x-ms-visibility": "internal",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "workspaces": {
+                  "items": {
+                    "$ref": "#/definitions/Workspace"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "summary": "List available workspaces"
+      }
+    },
+    "/v2/workspace/{workspaceId}/root": {
+      "get": {
+        "description": "Get the contents of the workspace root folder",
+        "operationId": "GetRootFolderContents",
+        "x-ms-visibility": "internal",
+        "parameters": [
+          {
+            "description": "The workspace to get the root folder of",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "type": "string",
+            "x-ms-dynamic-values": {
+              "operationId": "GetWorkspaces",
+              "value-collection": "workspaces",
+              "value-path": "id",
+              "value-title": "title"
+            },
+            "x-ms-summary": "Workspace"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Folder"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Get the root folder contents of a workspace"
+      }
+    },
+    "/v2/workspace/{workspaceId}/task": {
+      "post": {
+        "description": "Creates a To-Do in a workspace",
+        "operationId": "CreateWorkspaceTask",
+        "parameters": [
+          {
+            "description": "The workspace to create the task in",
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "type": "string",
+            "x-ms-dynamic-values": {
+              "operationId": "GetWorkspaces",
+              "value-collection": "workspaces",
+              "value-path": "id",
+              "value-title": "title"
+            },
+            "x-ms-summary": "Workspace"
+          },
+          {
+            "in": "body",
+            "name": "requestBody",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Create a To-Do task in a target workspace"
       }
     }
-
   },
-  "produces": [],
-  "responses": {},
+  "produces": [
+    "application/json"
+  ],
+  "responses": {
+    "500": {
+      "description": "Internal Error - Server process failed unexpectedly",
+      "schema": {
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
   "schemes": [
     "https"
   ],
   "security": [
     {
-      "oauth2_auth": []
+      "oauth2_auth": [
+        "Scope"
+      ]
     }
   ],
   "securityDefinitions": {
     "oauth2_auth": {
       "authorizationUrl": "https://login.huddle.net/request",
       "flow": "accessCode",
-      "scopes": {},
+      "scopes": {
+        "Scope": "Scope"
+      },
       "tokenUrl": "https://login.huddle.net/token",
       "type": "oauth2"
     }
