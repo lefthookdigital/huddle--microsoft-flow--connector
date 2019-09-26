@@ -1,9 +1,51 @@
 {
-  "basePath": "/dev",
+  "basePath": "/prod",
   "consumes": [
     "application/json"
   ],
   "definitions": {
+    "TextFileUpload": {
+      "properties": {
+        "description": {
+          "description": "A description of the file",
+          "type": "string",
+          "x-ms-summary": "Description"
+        },        
+        "title": {
+          "description": "The file's title",
+          "type": "string",
+          "x-ms-summary": "Title"
+        },
+        "content": {
+          "description": "Text content (with multi-line) for upload",          
+          "type": "string",
+          "x-ms-summary": "Text Content"
+        }
+      },
+      "type": "object"
+    },
+    "FileUpload": {
+      "properties": {
+        "content": {
+          "description": "The binary content of the file",
+          "format": "binary",
+          "type": "string",
+          "x-ms-summary": "File content"
+        },
+        "description": {
+          "description": "A description of the file",
+          "type": "string",
+          "x-ms-summary": "Description"
+        },
+        "title": {
+          "description": "The file's title",
+          "type": "string",
+          "x-ms-summary": "Title"
+        }
+        
+      },
+      "type": "object"
+    },
     "File": {
       "properties": {
         "content": {
@@ -33,6 +75,48 @@
           "type": "string",
           "x-ms-summary": "Extension"
         },
+        "folderId": {
+          "description": "ID of the folder in which the file resides",
+          "type": "string",
+          "x-ms-summary": "Folder ID"
+        },
+        "id": {
+          "description": "The file's ID",
+          "type": "string",
+          "x-ms-summary": "File ID"
+        },
+        "title": {
+          "description": "The file's title",
+          "type": "string",
+          "x-ms-summary": "Title"
+        },
+        "updated": {
+          "description": "The date and time the file was last updated",
+          "format": "date",
+          "type": "string",
+          "x-ms-summary": "Last Updated"
+        },
+        "workspaceId": {
+          "description": "The ID of the workspace in which the file resides",
+          "type": "string",
+          "x-ms-summary": "Workspace ID"
+        }
+      },
+      "type": "object"
+    },
+    "UploadFileTriggerOutput": {
+      "properties": {
+        "created": {
+          "description": "The date and time the file was created",
+          "format": "date",
+          "type": "string",
+          "x-ms-summary": "File Created"
+        },
+        "description": {
+          "description": "A description of the file",
+          "type": "string",
+          "x-ms-summary": "Description"
+        },        
         "folderId": {
           "description": "ID of the folder in which the file resides",
           "type": "string",
@@ -148,6 +232,46 @@
       },
       "type": "object"
     },
+    "TaskInputs": {
+      "properties": {
+        "asignee": {
+          "description": "The ID of user to whom the task is assigned, if any",
+          "type": "string",
+          "x-ms-summary": "Asignee"
+        },
+        "description": {
+          "description": "A description of the task",
+          "type": "string",
+          "x-ms-summary": "Description"
+        },
+        "dueDate": {
+          "description": "The date by which the task should be completed",
+          "type": "string",
+          "x-ms-summary": "Due Date"
+        },
+        "fileId": {
+          "description": "The ID of the file the task is associated with, if any",
+          "type": "string",
+          "x-ms-summary": "File ID"
+        },
+        "id": {
+          "description": "The ID of the task",
+          "type": "string",
+          "x-ms-summary": "Task ID"
+        },
+        "status": {
+          "description": "The task's status",
+          "type": "string",
+          "x-ms-summary": "Status"
+        },
+        "title": {
+          "description": "The task's title",
+          "type": "string",
+          "x-ms-summary": "Title"
+        }
+      },
+      "type": "object"
+    },
     "Workspace": {
       "properties": {
         "files": {
@@ -180,56 +304,14 @@
       "type": "object"
     }
   },
-  "host": "kkdwwk9869.execute-api.us-east-1.amazonaws.com",
+  "host": "59qgoo1gz4.execute-api.us-east-1.amazonaws.com",
   "info": {
-    "description": "Connector to Huddle's API",
+    "description": "Huddle is a secure document collaboration and client portal trusted by Enterprise and Government alike.",
     "title": "Huddle",
     "version": "2.0"
   },
   "parameters": {},
   "paths": {
-    "/v2/workspace/{workspaceId}/paths": {
-      "get": {
-        "description": "Experimental",
-        "operationId": "GetWorkspacePaths",
-        "x-ms-visibility": "internal",
-        "parameters": [
-          {
-            "name": "workspaceId",
-            "in": "path",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "paths": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "title": {
-                        "type": "string"
-                      },
-                      "path": {
-                        "type": "string"
-                      },
-                      "id": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/trigger/v2/poll/folder/{folderId}/upload": {
       "get": {
         "description": "Poll a target folder for it's most recent upload",
@@ -259,10 +341,10 @@
               "operationId": "GetWorkspacePaths",
               "parameters": {
                 "workspaceId": {
-                  "parameter" : "workspaceId"
+                  "parameter": "workspaceId"
                 }
               },
-              "value-collection" : "paths",
+              "value-collection": "paths",
               "value-path": "id",
               "value-title": "path"
             },
@@ -284,7 +366,7 @@
                 "files": {
                   "description": "files",
                   "items": {
-                    "$ref": "#/definitions/File"
+                    "$ref": "#/definitions/UploadFileTriggerOutput"
                   },
                   "type": "array"
                 }
@@ -295,11 +377,12 @@
         },
         "summary": "Poll a target folder for it's most recent upload",
         "x-ms-trigger": "batch",
-        "x-ms-trigger-hint": "Hint",
+        "x-ms-trigger-hint": "When a new file is uploaded",
         "x-ms-trigger-metadata": {
           "kind": "query",
           "mode": "polling"
-        }
+        },
+        "x-ms-visibility": "important"
       }
     },
     "/v2/file/{fileId}": {
@@ -324,7 +407,8 @@
             }
           }
         },
-        "summary": "Retrieve the content and metadata of a file using its ID"
+        "summary": "Retrieve the content and metadata of a file using its ID",
+        "x-ms-visibility": "important"
       }
     },
     "/v2/folder/{folderId}": {
@@ -354,12 +438,12 @@
             }
           }
         },
-        "summary": "Delete a target folder using its ID"
+        "summary": "Delete a target folder using its ID",
+        "x-ms-visibility": "important"
       },
       "get": {
         "description": "Gets a folder by ID from the Huddle API",
         "operationId": "GetFolder",
-        "x-ms-visibility": "internal",
         "parameters": [
           {
             "description": "The ID of the folder to get",
@@ -378,7 +462,8 @@
             }
           }
         },
-        "summary": "Retrieve a folder by it's ID"
+        "summary": "Retrieve a folder by it's ID",
+        "x-ms-visibility": "internal"
       },
       "post": {
         "description": "Creates a new folder within the target folder",
@@ -414,17 +499,41 @@
     "/v2/file/upload/folder/{folderId}": {
       "post": {
         "description": "Upload a form submission as a text file",
-        "summary": "Takes the content provided and uploads as a text file",
+        "summary": "Upload a form submission as a text file",
         "operationId": "UploadFormSubmissionAsNewFile",
-        "x-ms-visibility": "internal",
         "parameters": [
           {
-            "name": "folderId",
-            "in": "path",
+            "description": "The workspace where the file will be uploaded",
+            "in": "query",
+            "name": "workspaceId",
             "required": true,
             "type": "string",
-            "x-ms-summary": "Target Folder",
-            "description": "The folder to upload the document to"
+            "x-ms-dynamic-values": {
+              "operationId": "GetWorkspaces",
+              "value-collection": "workspaces",
+              "value-path": "id",
+              "value-title": "title"
+            },
+            "x-ms-summary": "Workspace"
+          },
+          {
+            "description": "The folder where the file will be uploaded",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "string",
+            "x-ms-dynamic-values": {
+              "operationId": "GetWorkspacePaths",
+              "parameters": {
+                "workspaceId": {
+                  "parameter": "workspaceId"
+                }
+              },
+              "value-collection": "paths",
+              "value-path": "id",
+              "value-title": "path"
+            },
+            "x-ms-summary": "Target Folder"
           },
           {
             "name": "requestBody",
@@ -432,7 +541,7 @@
             "description": "File options",
             "x-ms-summary": "File",
             "schema": {
-              "$ref": "#/definitions/File"
+              "$ref": "#/definitions/TextFileUpload"
             }
           }
         ],
@@ -449,13 +558,13 @@
             }
           }
         }
+
       }
     },
     "/v2/folder/{folderId}/children": {
       "get": {
         "description": "Lists the child folders contained within the target folder",
         "operationId": "GetChildFolders",
-        "x-ms-visibility": "internal",
         "parameters": [
           {
             "description": "The ID of the parent folder",
@@ -477,43 +586,53 @@
             }
           }
         },
-        "summary": "Retrieve a list of all of the subfolders within a target folder"
+        "summary": "Retrieve a list of all of the subfolders within a target folder",
+        "x-ms-visibility": "internal"
       }
     },
     "/v2/folder/{folderId}/upload": {
       "post": {
         "description": "Uploads a file to the target folder",
         "operationId": "UploadFile",
-        "x-ms-visibility": "important",
         "parameters": [
           {
-            "description": "The target folder to upload the file to",
+            "description": "The workspace where the file will be uploaded",
+            "in": "query",
+            "name": "workspaceId",
+            "required": true,
+            "type": "string",
+            "x-ms-dynamic-values": {
+              "operationId": "GetWorkspaces",
+              "value-collection": "workspaces",
+              "value-path": "id",
+              "value-title": "title"
+            },
+            "x-ms-summary": "Workspace"
+          },
+          {
+            "description": "The folder to target for file upload",
             "in": "path",
             "name": "folderId",
             "required": true,
             "type": "string",
             "x-ms-dynamic-values": {
-              "operationId": "GetChildFolders",
+              "operationId": "GetWorkspacePaths",
               "parameters": {
-                "folderId": {
-                  "x-ms-dynamic-values": {
-                    "operationId": "GetWorkspaces",
-                    "value-collection": "folders",
-                    "value-path": "id",
-                    "value-title": "title"
-                  }
+                "workspaceId": {
+                  "parameter" : "workspaceId"
                 }
               },
+              "value-collection" : "paths",
               "value-path": "id",
-              "value-title": "title"
+              "value-title": "path"
             },
-            "x-ms-summary": "Folder"
+            "x-ms-summary": "Target Folder"
           },
           {
             "in": "body",
             "name": "requestBody",
             "schema": {
-              "$ref": "#/definitions/File"
+              "$ref": "#/definitions/FileUpload"
             }
           }
         ],
@@ -521,16 +640,17 @@
           "201": {
             "description": "OK",
             "schema": {
-              "type": "object",
               "properties": {
                 "file": {
                   "$ref": "#/definitions/File"
                 }
-              }
+              },
+              "type": "object"
             }
           }
         },
-        "summary": "Create and upload a new file to a target folder"
+        "summary": "Create and upload a new file to a target folder",
+        "x-ms-visibility": "important"
       }
     },
     "/v2/poll/folder/{folderId}/upload": {},
@@ -556,14 +676,14 @@
             }
           }
         },
-        "summary": "Update a task's status to completed using it's ID"
+        "summary": "Update a task's status to completed using it's ID",
+        "x-ms-visibility": "important"
       }
     },
     "/v2/workspace": {
       "get": {
         "description": "Get an array of available workspaces",
         "operationId": "GetWorkspaces",
-        "x-ms-visibility": "internal",
         "parameters": [],
         "responses": {
           "200": {
@@ -584,14 +704,57 @@
             "$ref": "#/responses/500"
           }
         },
-        "summary": "List available workspaces"
+        "summary": "List available workspaces",
+        "x-ms-visibility": "internal"
+      }
+    },
+    "/v2/workspace/{workspaceId}/paths": {
+      "get": {
+        "description": "Get two level depth path listing",
+        "operationId": "GetWorkspacePaths",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "paths": {
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "path": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Get Workspace Paths",
+        "x-ms-visibility": "internal"
       }
     },
     "/v2/workspace/{workspaceId}/root": {
       "get": {
         "description": "Get the contents of the workspace root folder",
         "operationId": "GetRootFolderContents",
-        "x-ms-visibility": "internal",
         "parameters": [
           {
             "description": "The workspace to get the root folder of",
@@ -619,7 +782,8 @@
             }
           }
         },
-        "summary": "Get the root folder contents of a workspace"
+        "summary": "Get the root folder contents of a workspace",
+        "x-ms-visibility": "internal"
       }
     },
     "/v2/workspace/{workspaceId}/task": {
@@ -645,7 +809,7 @@
             "in": "body",
             "name": "requestBody",
             "schema": {
-              "$ref": "#/definitions/Task"
+              "$ref": "#/definitions/TaskInputs"
             }
           }
         ],
@@ -662,7 +826,8 @@
             }
           }
         },
-        "summary": "Create a To-Do task in a target workspace"
+        "summary": "Create a To-Do task in a target workspace",
+        "x-ms-visibility": "important"
       }
     }
   },
