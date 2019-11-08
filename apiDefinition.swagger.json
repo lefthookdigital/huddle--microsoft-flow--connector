@@ -10,14 +10,14 @@
           "description": "A description of the file",
           "type": "string",
           "x-ms-summary": "Description"
-        },        
+        },
         "title": {
           "description": "The file's title",
           "type": "string",
           "x-ms-summary": "Title"
         },
         "content": {
-          "description": "Text content (with multi-line) for upload",          
+          "description": "Text content (with multi-line) for upload",
           "type": "string",
           "x-ms-summary": "Text Content"
         }
@@ -42,7 +42,6 @@
           "type": "string",
           "x-ms-summary": "Title"
         }
-        
       },
       "type": "object"
     },
@@ -116,7 +115,7 @@
           "description": "A description of the file",
           "type": "string",
           "x-ms-summary": "Description"
-        },        
+        },
         "folderId": {
           "description": "ID of the folder in which the file resides",
           "type": "string",
@@ -304,10 +303,10 @@
       "type": "object"
     }
   },
-  "host": "msflow.huddle.net",
+  "host": "eny7m4hpc46tl.x.pipedream.net",
   "info": {
     "description": "Huddle is a secure document collaboration and client portal trusted by Enterprise and Government alike.",
-    "title": "Huddle",
+    "title": "Banana",
     "version": "2.0"
   },
   "parameters": {},
@@ -558,7 +557,6 @@
             }
           }
         }
-
       }
     },
     "/v2/folder/{folderId}/children": {
@@ -619,10 +617,10 @@
               "operationId": "GetWorkspacePaths",
               "parameters": {
                 "workspaceId": {
-                  "parameter" : "workspaceId"
+                  "parameter": "workspaceId"
                 }
               },
-              "value-collection" : "paths",
+              "value-collection": "paths",
               "value-path": "id",
               "value-title": "path"
             },
