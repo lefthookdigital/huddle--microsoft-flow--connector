@@ -303,7 +303,7 @@
       "type": "object"
     }
   },
-  "host": "59qgoo1gz4.execute-api.us-east-1.amazonaws.com",
+  "host": "msflow.huddle.net",
   "info": {
     "description": "Huddle is a secure document collaboration and client portal trusted by Enterprise and Government alike.",
     "title": "Huddle",
