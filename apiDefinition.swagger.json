@@ -183,10 +183,10 @@
     },
     "Task": {
       "properties": {
-        "asignee": {
+        "assignee": {
           "description": "The ID of user to whom the task is assigned, if any",
           "type": "string",
-          "x-ms-summary": "Asignee"
+          "x-ms-summary": "Assignee"
         },
         "description": {
           "description": "A description of the task",
@@ -233,10 +233,10 @@
     },
     "TaskInputs": {
       "properties": {
-        "asignee": {
+        "assignee": {
           "description": "The ID of user to whom the task is assigned, if any",
           "type": "string",
-          "x-ms-summary": "Asignee"
+          "x-ms-summary": "Assignee"
         },
         "description": {
           "description": "A description of the task",
