@@ -4,47 +4,6 @@
     "application/json"
   ],
   "definitions": {
-    "TextFileUpload": {
-      "properties": {
-        "description": {
-          "description": "A description of the file",
-          "type": "string",
-          "x-ms-summary": "Description"
-        },
-        "title": {
-          "description": "The file's title",
-          "type": "string",
-          "x-ms-summary": "Title"
-        },
-        "content": {
-          "description": "Text content (with multi-line) for upload",
-          "type": "string",
-          "x-ms-summary": "Text Content"
-        }
-      },
-      "type": "object"
-    },
-    "FileUpload": {
-      "properties": {
-        "content": {
-          "description": "The binary content of the file",
-          "format": "binary",
-          "type": "string",
-          "x-ms-summary": "File content"
-        },
-        "description": {
-          "description": "A description of the file",
-          "type": "string",
-          "x-ms-summary": "Description"
-        },
-        "title": {
-          "description": "The file's title",
-          "type": "string",
-          "x-ms-summary": "Title"
-        }
-      },
-      "type": "object"
-    },
     "File": {
       "properties": {
         "content": {
@@ -103,44 +62,23 @@
       },
       "type": "object"
     },
-    "UploadFileTriggerOutput": {
+    "FileUpload": {
       "properties": {
-        "created": {
-          "description": "The date and time the file was created",
-          "format": "date",
+        "content": {
+          "description": "The binary content of the file",
+          "format": "binary",
           "type": "string",
-          "x-ms-summary": "File Created"
+          "x-ms-summary": "File content"
         },
         "description": {
           "description": "A description of the file",
           "type": "string",
           "x-ms-summary": "Description"
         },
-        "folderId": {
-          "description": "ID of the folder in which the file resides",
-          "type": "string",
-          "x-ms-summary": "Folder ID"
-        },
-        "id": {
-          "description": "The file's ID",
-          "type": "string",
-          "x-ms-summary": "File ID"
-        },
         "title": {
           "description": "The file's title",
           "type": "string",
           "x-ms-summary": "Title"
-        },
-        "updated": {
-          "description": "The date and time the file was last updated",
-          "format": "date",
-          "type": "string",
-          "x-ms-summary": "Last Updated"
-        },
-        "workspaceId": {
-          "description": "The ID of the workspace in which the file resides",
-          "type": "string",
-          "x-ms-summary": "Workspace ID"
         }
       },
       "type": "object"
@@ -181,12 +119,35 @@
       },
       "type": "object"
     },
-    "Task": {
+    "NewApprovalTriggerOutput": {
       "properties": {
-        "assignee": {
-          "description": "The ID of user to whom the task is assigned, if any",
+        "assignees": {
+          "description": "An array of assigned users",
+          "items": {
+            "$ref": "#/definitions/Assignee"
+          },
+          "type": "array",
+          "x-ms-summary": "Approval Assignees"
+        },
+        "assignerName": {
+          "description": "Name of the approval requester",
           "type": "string",
-          "x-ms-summary": "Assignee"
+          "x-ms-summary": "Approval Requester Name"
+        },
+        "assignerEmail": {
+          "description": "Email of the approval requester",
+          "type": "string",
+          "x-ms-summary": "Approval Requester Email"
+        },
+        "ownerName": {
+          "description": "Name of the approval task owner",
+          "type": "string",
+          "x-ms-summary": "Approval Task Owner Name"
+        },
+        "ownerEmail": {
+          "description": "Email of the approval task owner",
+          "type": "string",
+          "x-ms-summary": "Approval Task Owner Email"
         },
         "description": {
           "description": "A description of the task",
@@ -198,40 +159,65 @@
           "type": "string",
           "x-ms-summary": "Due Date"
         },
+        "created": {
+          "description": "The created date for the approval task",
+          "type": "string",
+          "x-ms-summary": "Created Date"
+        },
         "fileId": {
           "description": "The ID of the file the task is associated with, if any",
           "type": "string",
           "x-ms-summary": "File ID"
         },
-        "id": {
-          "description": "The ID of the task",
+        "fileTitle": {
+          "description": "The file's title",
           "type": "string",
-          "x-ms-summary": "Task ID"
+          "x-ms-summary": "File Title"
+        },
+        "id": {
+          "description": "The ID of the Approval task",
+          "type": "string",
+          "x-ms-summary": "Approval Task ID"
         },
         "status": {
           "description": "The task's status",
           "type": "string",
           "x-ms-summary": "Status"
         },
-        "title": {
-          "description": "The task's title",
-          "type": "string",
-          "x-ms-summary": "Title"
-        },
         "type": {
           "description": "The type of task",
           "type": "string",
-          "x-ms-summary": "Type"
+          "x-ms-summary": "Task Type"
         },
         "workspaceId": {
-          "description": "The ID of the workspace the task resides in",
+          "description": "The ID of the workspace for the given Approval task",
           "type": "string",
           "x-ms-summary": "Workspace ID"
+        },
+        "workspaceName": {
+          "description": "The name of the workspace for the given Approval task",
+          "type":"string",
+          "x-ms-summary": "Workspace Name"
         }
       },
       "type": "object"
     },
-    "NewApprovalTriggerOutput": {
+    "Assignee": {
+      "properties": {
+        "name": {
+          "description": "Assignee name",
+          "type": "string",
+          "x-ms-summary": "Assignee Name"
+        },
+        "email": {
+          "description": "Assignee email",
+          "type": "string",
+          "x-ms-summary": "Assignee Email"
+        }
+      },
+      "type": "object"
+    },
+    "Task": {
       "properties": {
         "assignee": {
           "description": "The ID of user to whom the task is assigned, if any",
@@ -321,6 +307,68 @@
       },
       "type": "object"
     },
+    "TextFileUpload": {
+      "properties": {
+        "content": {
+          "description": "Text content (with multi-line) for upload",
+          "type": "string",
+          "x-ms-summary": "Text Content"
+        },
+        "description": {
+          "description": "A description of the file",
+          "type": "string",
+          "x-ms-summary": "Description"
+        },
+        "title": {
+          "description": "The file's title",
+          "type": "string",
+          "x-ms-summary": "Title"
+        }
+      },
+      "type": "object"
+    },
+    "UploadFileTriggerOutput": {
+      "properties": {
+        "created": {
+          "description": "The date and time the file was created",
+          "format": "date",
+          "type": "string",
+          "x-ms-summary": "File Created"
+        },
+        "description": {
+          "description": "A description of the file",
+          "type": "string",
+          "x-ms-summary": "Description"
+        },
+        "folderId": {
+          "description": "ID of the folder in which the file resides",
+          "type": "string",
+          "x-ms-summary": "Folder ID"
+        },
+        "id": {
+          "description": "The file's ID",
+          "type": "string",
+          "x-ms-summary": "File ID"
+        },
+        "title": {
+          "description": "The file's title",
+          "type": "string",
+          "x-ms-summary": "Title"
+        },
+        "updated": {
+          "description": "The date and time the file was last updated",
+          "format": "date",
+          "type": "string",
+          "x-ms-summary": "Last Updated"
+        },
+        "workspaceId": {
+          "description": "The ID of the workspace in which the file resides",
+          "type": "string",
+          "x-ms-summary": "Workspace ID"
+        }
+      },
+      "type": "object"
+    },
     "Workspace": {
       "properties": {
         "files": {
@@ -361,7 +409,7 @@
   },
   "parameters": {},
   "paths": {
-    "/v2/poll/folder/{folderId}/upload": {
+    "/trigger/v2/poll/folder/{folderId}/upload": {
       "get": {
         "description": "Poll a target folder for it's most recent upload",
         "operationId": "PollFolderForFileUpload",
@@ -434,9 +482,9 @@
         "x-ms-visibility": "important"
       }
     },
-    "/v2/poll/workspace/{workspaceId}/approvals": {
+    "/trigger/v2/poll/workspace/{workspaceId}/approvals": {
       "get": {
-        "description": "Poll a target workspace for it's most recent approval",
+        "description": "Poll a target workspace for it's most recent approval request",
         "operationId": "PollWorkspaceForNewApproval",
         "parameters": [
           {
@@ -478,14 +526,78 @@
             }
           }
         },
-        "summary": "Poll a target workspace for it's most recent approval",
+        "summary": "Poll a target workspace for it's most recent approval request",
         "x-ms-trigger": "batch",
-        "x-ms-trigger-hint": "When a new approval is uploaded",
+        "x-ms-trigger-hint": "When a new approval is requested",
         "x-ms-trigger-metadata": {
           "kind": "query",
           "mode": "polling"
         },
         "x-ms-visibility": "important"
+      }
+    },
+    "/v2/file/upload/folder/{folderId}": {
+      "post": {
+        "description": "Upload a form submission as a text file",
+        "operationId": "UploadFormSubmissionAsNewFile",
+        "parameters": [
+          {
+            "description": "The workspace where the file will be uploaded",
+            "in": "query",
+            "name": "workspaceId",
+            "required": true,
+            "type": "string",
+            "x-ms-dynamic-values": {
+              "operationId": "GetWorkspaces",
+              "value-collection": "workspaces",
+              "value-path": "id",
+              "value-title": "title"
+            },
+            "x-ms-summary": "Workspace"
+          },
+          {
+            "description": "The folder where the file will be uploaded",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "string",
+            "x-ms-dynamic-values": {
+              "operationId": "GetWorkspacePaths",
+              "parameters": {
+                "workspaceId": {
+                  "parameter": "workspaceId"
+                }
+              },
+              "value-collection": "paths",
+              "value-path": "id",
+              "value-title": "path"
+            },
+            "x-ms-summary": "Target Folder"
+          },
+          {
+            "description": "File options",
+            "in": "body",
+            "name": "requestBody",
+            "schema": {
+              "$ref": "#/definitions/TextFileUpload"
+            },
+            "x-ms-summary": "File"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "file": {
+                  "$ref": "#/definitions/File"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Upload a form submission as a text file"
       }
     },
     "/v2/file/{fileId}": {
@@ -506,8 +618,8 @@
           "200": {
             "description": "OK",
             "schema": {
-              "format": "binary",
               "description": "The content of the file.",
+              "format": "binary",
               "type": "string",
               "x-ms-summary": "File Content"
             }
@@ -600,70 +712,6 @@
           }
         },
         "summary": "Create a new subfolder"
-      }
-    },
-    "/v2/file/upload/folder/{folderId}": {
-      "post": {
-        "description": "Upload a form submission as a text file",
-        "summary": "Upload a form submission as a text file",
-        "operationId": "UploadFormSubmissionAsNewFile",
-        "parameters": [
-          {
-            "description": "The workspace where the file will be uploaded",
-            "in": "query",
-            "name": "workspaceId",
-            "required": true,
-            "type": "string",
-            "x-ms-dynamic-values": {
-              "operationId": "GetWorkspaces",
-              "value-collection": "workspaces",
-              "value-path": "id",
-              "value-title": "title"
-            },
-            "x-ms-summary": "Workspace"
-          },
-          {
-            "description": "The folder where the file will be uploaded",
-            "in": "path",
-            "name": "folderId",
-            "required": true,
-            "type": "string",
-            "x-ms-dynamic-values": {
-              "operationId": "GetWorkspacePaths",
-              "parameters": {
-                "workspaceId": {
-                  "parameter": "workspaceId"
-                }
-              },
-              "value-collection": "paths",
-              "value-path": "id",
-              "value-title": "path"
-            },
-            "x-ms-summary": "Target Folder"
-          },
-          {
-            "name": "requestBody",
-            "in": "body",
-            "description": "File options",
-            "x-ms-summary": "File",
-            "schema": {
-              "$ref": "#/definitions/TextFileUpload"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "file": {
-                  "$ref": "#/definitions/File"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/v2/folder/{folderId}/children": {

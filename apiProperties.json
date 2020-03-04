@@ -29,6 +29,36 @@
         "type": "oauthSetting"
       }
     },
-    "iconBrandColor": "#0089D0"
+    "iconBrandColor": "#0089D0",
+    "policyTemplateInstances": [
+      {
+        "parameters": {
+          "x-ms-apimTemplate-operationName": [
+            "PollFolderForFileUpload"
+          ],
+          "x-ms-apimTemplateParameter.triggerConfig": {
+            "after": "@{triggerBody().files[0].created}"
+          },
+          "x-ms-apimTemplateParameter.triggerDataPath": "@triggerBody().files"
+        },
+        "templateId": "pollingtrigger",
+        "title": "PollingTriggerPolicyForFiles",
+        "type": "PollingTrigger"
+      },
+      {
+        "parameters": {
+          "x-ms-apimTemplate-operationName": [
+            "PollWorkspaceForNewApproval"
+          ],
+          "x-ms-apimTemplateParameter.triggerConfig": {
+            "after": "@{triggerBody().approvals[0].created}"
+          },
+          "x-ms-apimTemplateParameter.triggerDataPath": "@triggerBody().approvals"
+        },
+        "templateId": "pollingtrigger",
+        "title": "PollingTriggerPolicyForApprovals",
+        "type": "PollingTrigger"
+      }
+    ]
   }
 }
