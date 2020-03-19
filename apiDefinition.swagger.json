@@ -1,17 +1,11 @@
 {
-  "basePath": "/prod",
+  "basePath": "/",
   "consumes": [
     "application/json"
   ],
   "definitions": {
     "File": {
       "properties": {
-        "content": {
-          "description": "The binary content of the file",
-          "format": "binary",
-          "type": "string",
-          "x-ms-summary": "Content"
-        },
         "contentType": {
           "description": "The file's document MIME type",
           "type": "string",
@@ -115,6 +109,22 @@
           "description": "The title of the folder",
           "type": "string",
           "x-ms-summary": "Title"
+        }
+      },
+      "type": "object"
+    },
+    "FolderInput": {
+      "required": ["title"],
+      "properties": {
+        "title": {
+          "description": "The title of the folder",
+          "type": "string",
+          "x-ms-summary": "Title"
+        },
+        "description": {
+          "description": "Description",
+          "type": "string",
+          "x-ms-summary": "Description"
         }
       },
       "type": "object"
@@ -268,6 +278,7 @@
       "type": "object"
     },
     "TaskInputs": {
+      "required": ["title"],
       "properties": {
         "assignee": {
           "description": "The ID of user to whom the task is assigned, if any",
@@ -401,10 +412,10 @@
       "type": "object"
     }
   },
-  "host": "59qgoo1gz4.execute-api.us-east-1.amazonaws.com",
+  "host": "msflow.huddle.net",
   "info": {
     "description": "Huddle is a secure document collaboration and client portal trusted by Enterprise and Government alike.",
-    "title": "Huddle POC",
+    "title": "Huddle",
     "version": "2.0"
   },
   "parameters": {},
@@ -602,7 +613,7 @@
     },
     "/v2/file/{fileId}": {
       "get": {
-        "description": "Get the content and metadata of a file by ID",
+        "description": "Get the content of a file by ID",
         "operationId": "GetFile",
         "parameters": [
           {
@@ -699,7 +710,7 @@
             "in": "body",
             "name": "requestBody",
             "schema": {
-              "$ref": "#/definitions/Folder"
+              "$ref": "#/definitions/FolderInput"
             }
           }
         ],
